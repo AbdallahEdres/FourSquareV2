@@ -29,7 +29,7 @@ final class LocationManager: NSObject, LocationManagerProtocol{
 
         case .authorizedAlways, .authorizedWhenInUse, .authorized:
             isAuthorized = true
-             
+
         default:
             isAuthorized = false
         }

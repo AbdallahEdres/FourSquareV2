@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct FourSquareV2App: App {
+    let tabBarCoordinator: any TabBarCoordinatorProtocol
+    init() {
+        self.tabBarCoordinator = TabBarCoordinator()
+    }
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            tabBarCoordinator.start()
         }
     }
 }
