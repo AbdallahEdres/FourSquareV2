@@ -8,12 +8,10 @@
 import SwiftUI
 
 struct MoreView<VM: MoreViewModelProtocol>: View {
-    // MARK: - Properties
     @StateObject var viewModel: VM
     init(viewModel:  VM) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
-    // MARK: - Body
     var body: some View {
         ScrollView {
             VStack(spacing: 16) {
