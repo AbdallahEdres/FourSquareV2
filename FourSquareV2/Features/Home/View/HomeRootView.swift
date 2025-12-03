@@ -19,6 +19,7 @@ struct HomeRootView<C: HomeCoordinatorProtocol>: View {
                 .navigationDestination(for: HomeRoutes.self) { route in
                     coordinator.viewFor(route)
                         .navigationTitle(route.title)
+                        .toolbar(.hidden, for: .tabBar)
                 }
         }
     }

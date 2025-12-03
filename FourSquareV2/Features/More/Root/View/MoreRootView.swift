@@ -19,6 +19,7 @@ struct MoreRootView<C: MoreCoordinatorProtocol>: View {
                 .navigationDestination(for: MoreRoutes.self) { route in
                     coordinator.viewFor(route)
                         .navigationTitle(route.title)
+                        .toolbar(.hidden, for: .tabBar)
                 }
         }
     }

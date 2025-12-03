@@ -21,8 +21,8 @@ final class MoreCoordinator: MoreCoordinatorProtocol{
         switch route {
         case .more:
             return buildMoreView()
-        default:
-            return AnyView(EmptyView())
+        case .terms:
+            return buildTermsView()
         }
     }
     func push(_ route: MoreRoutes) {
@@ -34,6 +34,11 @@ extension MoreCoordinator{
     private func buildMoreView() -> AnyView{
         let vm = MoreViewModel(coordinator: self)
         let view = MoreView(viewModel: vm)
+        return AnyView(view)
+    }
+    private func buildTermsView() -> AnyView{
+        let vm = TermsViewModel()
+        let view = TermsView(viewModel: vm)
         return AnyView(view)
     }
 }
