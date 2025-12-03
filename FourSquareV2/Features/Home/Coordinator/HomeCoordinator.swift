@@ -14,7 +14,7 @@ final class HomeCoordinator: HomeCoordinatorProtocol{
     private var root: AnyView?
 
     func start() -> AnyView {
-        if root == nil { root = viewFor(.home)}
+        if root == nil { root = AnyView(HomeRootView(coordinator: self))}
         return root!
     }
 

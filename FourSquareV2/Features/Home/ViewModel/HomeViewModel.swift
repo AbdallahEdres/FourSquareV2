@@ -45,22 +45,24 @@ extension HomeViewModel{
             .receive(on: DispatchQueue.main)
             .sink {[weak self] location in
                 guard let self else {return}
+                self.isLoading = false
                 getVenues(location: location)
             }
             .store(in: &cancellable)
     }
 
     private func getVenues(location: LocationModel){
+        isLoading = true
         let api: ApiRequest = .getVenuesApi(location: location)
         ApiClient
             .getDataFrom(api: api, as: NearByVenueModel.self)
             .compactMap({$0})
             .sink {[weak self] result in
+                self?.isLoading = false
                 if case let .failure(error) = result{
                     print(error.localizedDescription)
                     self?.showError(error.localizedDescription)
                 }
-                self?.isLoading = false
             } receiveValue: {[weak self] response in
                 self?.handleResponse(response)
             }.store(in: &cancellable)
@@ -89,8 +91,9 @@ extension HomeViewModel{
             .compactMap({$0})
             .receive(on: DispatchQueue.main)
             .sink {[weak self] isConnected in
+                if isConnected, self?.noInterNet == true { self?.refresh() }
+
                 self?.noInterNet = !isConnected
-                if isConnected { self?.refresh() }
             }.store(in: &cancellable)
     }
     private func bindLocationPermission(){

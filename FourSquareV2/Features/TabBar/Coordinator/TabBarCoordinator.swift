@@ -27,7 +27,7 @@ final class TabBarCoordinator: TabBarCoordinatorProtocol {
         case .profile:
             return AnyView(Text(tab.title))
         case .more:
-            return AnyView(Text(tab.title))
+            return buildMoreCycle()
         }
     }
 }
@@ -35,6 +35,10 @@ final class TabBarCoordinator: TabBarCoordinatorProtocol {
 extension TabBarCoordinator{
     private func buildHomeCycle()-> AnyView{
         let coordinator = HomeCoordinator()
+        return coordinator.start()
+    }
+    private func buildMoreCycle()-> AnyView{
+        let coordinator = MoreCoordinator()
         return coordinator.start()
     }
 }
