@@ -12,6 +12,7 @@ struct ApiRequest: URLRequestConvertible{
     var server: String
     var path: String
     var method: Method
+
     private var httpMethod: HTTPMethod {
         switch method {
         case .connect:
@@ -62,5 +63,25 @@ struct ApiRequest: URLRequestConvertible{
         case put
         case query
         case trace
+    }
+}
+
+extension ApiRequest{
+    static func getVenuesApi(location: LocationModel) -> ApiRequest{
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyyMMdd"
+        let currentFormattedDate = formatter.string(for: Date())
+        let params = [
+            "ll": "\(location.latitude),\(location.longtude)",
+            "client_id": "4EQRZPSGKBZGFSERGJY055FRW2OSPJRZYR4C3J0JN2CQQFIV",
+            "client_secret": "AJR4B5LLRONWAJWJJOACHAFLCWS2YJAZMGQNFFZQP0IB3THR",
+            "v": currentFormattedDate
+        ].compactMapValues({$0})
+            return .init(
+            server: "https://api.foursquare.com/v2/",
+            path: "venues/search",
+            method: .get,
+            params: params
+        )
     }
 }
