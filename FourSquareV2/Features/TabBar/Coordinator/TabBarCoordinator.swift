@@ -21,6 +21,20 @@ final class TabBarCoordinator: TabBarCoordinatorProtocol {
         return root!
     }
     func viewFor(_ tab: TabBarRoutes) -> AnyView {
-        return AnyView(Text(tab.title))
+        switch tab {
+        case .home:
+            return buildHomeCycle()
+        case .profile:
+            return AnyView(Text(tab.title))
+        case .more:
+            return AnyView(Text(tab.title))
+        }
+    }
+}
+
+extension TabBarCoordinator{
+    private func buildHomeCycle()-> AnyView{
+        let coordinator = HomeCoordinator()
+        return coordinator.start()
     }
 }
