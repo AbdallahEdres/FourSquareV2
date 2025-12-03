@@ -13,5 +13,6 @@ protocol MoreCoordinatorProtocol: ObservableObject{
 
     func start() -> AnyView
     func viewFor(_ route: MoreRoutes) -> AnyView
+    func push(_ route: MoreRoutes)
 }
 

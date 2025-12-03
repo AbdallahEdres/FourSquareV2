@@ -13,7 +13,7 @@ final class MoreCoordinator: MoreCoordinatorProtocol{
     private var root: AnyView?
 
     func start() -> AnyView {
-        if root == nil { root = AnyView(EmptyView())}
+        if root == nil { root = AnyView(MoreRootView(coordinator: self))}
         return root!
     }
 
@@ -23,7 +23,9 @@ final class MoreCoordinator: MoreCoordinatorProtocol{
             return AnyView(EmptyView())
         }
     }
-
+    func push(_ route: MoreRoutes) {
+        path.append(route)
+    }
 }
 
 extension MoreCoordinator{
