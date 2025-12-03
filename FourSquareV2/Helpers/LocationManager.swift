@@ -20,6 +20,8 @@ final class LocationManager: NSObject, LocationManagerProtocol{
     override init() {
         self.manager = .init()
         super.init()
+        manager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+        manager.delegate = self
     }
     private func checkAuthorization() -> Bool{
         var isAuthorized = false
@@ -72,5 +74,8 @@ extension LocationManager: CLLocationManagerDelegate{
         default:
             break
         }
+    }
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Location error: \(error.localizedDescription)")
     }
 }
